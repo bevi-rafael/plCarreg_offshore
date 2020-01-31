@@ -21,7 +21,7 @@
 		
 		<content>
 			<!--<core:Fragment fragmentName="com.eldorado.ewm.plCarregOffshore.view.fragment.S1_Filter" type="XML"/>-->
-			<!--<core:Fragment fragmentName="com.eldorado.ewm.plCarregOffshore.view.fragment.S1_Table" type="XML"/>-->
+			<core:Fragment fragmentName="com.eldorado.ewm.plCarregOffshore.view.fragment.S1_Table" type="XML"/>
 		</content>
 	
 	</Page>

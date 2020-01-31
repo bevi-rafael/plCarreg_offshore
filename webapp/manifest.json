@@ -92,6 +92,9 @@
             },
             "lgnum": {
             	"type": "sap.ui.model.json.JSONModel"
+            },
+            "table": {
+            	"type": "sap.ui.model.json.JSONModel"
             }
 		},
 		"resources": {

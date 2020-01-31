@@ -1,0 +1,37 @@
+<core:FragmentDefinition 
+	id="Table"
+	xmlns="sap.m" 
+	xmlns:core="sap.ui.core" 
+	xmlns:l="sap.ui.layout"
+	xmlns:cms="sap.suite.ui.commons"
+	xmlns:mvc="sap.ui.core.mvc" 
+	xmlns:table="sap.ui.table"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	
+	<table:Table
+		id="idTable"
+		rows="{table>/}"
+		selectionMode="None"
+		visibleRowCount="7"
+		paste="onPaste"
+		arialabelledby="title">
+		
+		<table:columns>
+			<table:Column width="11rem">
+				<Label text="Product Name" />
+				<table:template>
+					<Text text="{table>Name}"/>
+				</table:template>
+			</table:Column>
+			
+			<table:Column width="11rem">
+				<Label text="Product Id" />
+				<table:template>
+					<Input value="{table>ProductId}"/>
+				</table:template>
+			</table:Column>
+		</table:columns>
+		
+	</table:Table>
+
+</core:FragmentDefinition>

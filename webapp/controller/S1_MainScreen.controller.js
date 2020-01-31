@@ -39,12 +39,12 @@ sap.ui.define([
 				}
 				this.setLgnum(field);
 				this._addHead();
-				// this.onSearch();
+				this.onSearch();
 	    		oViewModel.setProperty('/busy', false);
 			}.bind(this);
 
 			var onError = function(oError) {
-				MessageToast.show(this.getMsg("msg001"));
+				MessageToast.show(this.getMsg("errorLgnum"));
 	    		oViewModel.setProperty('/busy', false);
 			}.bind(this);
 			
@@ -90,9 +90,7 @@ sap.ui.define([
 				jQuery.sap.syncStyleClass("sapUiSizeCompact", this.getView(), this._oDialogLgnum);
 				this._oDialogLgnum.open();
 				
-			} else{
-				MessageToast.show(this.getMsg("msg001"));
-			}
+			} else{ MessageToast.show(this.getMsg("errorLgnum")); }
 			
 		},
 		
@@ -111,7 +109,8 @@ sap.ui.define([
 				this.setLgnum(aSelect[0]);
 				this._addHead();
 				// this.onClear();
-				// this.onSearch();
+				this.onSearch();
+				oViewModel.setProperty('/busy', false);
 			}
 		},
 		
@@ -119,6 +118,31 @@ sap.ui.define([
 			var aHtml = "<strong><em>" + this.getLgnum().Centro + ' - ' + this.getLgnum().Descricao + "</em></strong>";
 			var oModelHtml = new JSONModel({HTMLPORTO: aHtml});
 			this.getView().setModel(oModelHtml);
+			
+			if(this.getLgnum().Auth === false){
+				MessageToast.show(this.getMsg("notAuthLgnum"));
+				this.getView().byId("idTable").setVisible(false);
+			}else{
+				this.getView().byId("idTable").setVisible(true);
+			}
+		},
+		
+		onSearch: function(){
+			var oTable = this.getOwnerComponent().getModel("table");
+			var oViewModel = this.getView().getModel('view');
+
+			var onSuccess = function(oResultData, oResponse) {
+				oTable.setData(oResultData.results);
+	    		oViewModel.setProperty('/busy', false);
+			}.bind(this);
+
+			var onError = function(oError) {
+				MessageToast.show(this.getMsg("errorTable"));
+	    		oViewModel.setProperty('/busy', false);
+			}.bind(this);
+			
+			var oModel = this.getOwnerComponent().getModel('DadosOffshore'); 
+			oModel.read('/TableSet', { success: onSuccess, error: onError } );
 		}
 		
 	});
