@@ -22,123 +22,104 @@ sap.ui.define([
 			var oViewModel = this.getView().getModel('view');
 	    	oViewModel.setProperty('/busy', true);
 	    	
-			// this._requestOdataLgnum();
+			this._requestOdataLgnum();
 		},
 		
-		// _requestOdataLgnum: function () {
-		// 	var oLgnum = this.getOwnerComponent().getModel("lgnum");
-		// 	var oModel = this.getOwnerComponent().getModel('DadosPorto'); 
-		// 	var aHtml, oModelHtml;
-			
-		// 	var onSuccess = function(oResultData, oResponse) {
-		// 		this.setLgnum(oResultData.results[0]);
-		// 		this.aLgnum = this.getLgnum();
-		// 		oModel.read('/PortoSet', { success: onSuccessArray, error: onError } );
-		// 	}.bind(this);
-			
-		// 	var onSuccessArray = function(oResultData, oResponse) {
-		//     	oLgnum.setData(oResultData.results);
+		_requestOdataLgnum: function () {
+			var oLgnum = this.getOwnerComponent().getModel("lgnum");
+			var oViewModel = this.getView().getModel('view');
 
-		// 		if(!this.aLgnum.IDPorto){ 
-		// 			this.setLgnum(oLgnum.getData()[0]);
-		// 			this.aLgnum = this.getLgnum();
-		// 		}
-		// 		if(this.aLgnum){
-		// 			aHtml = "<strong><em>" + this.aLgnum.IDPorto + ' - ' + this.aLgnum.DescPorto + "</em></strong>";
-		// 		}
-					
-		// 		oModelHtml = new JSONModel({HTMLPORTO: aHtml});
-		// 		this.getView().setModel(oModelHtml);
-		// 		this._requestPerfil(this.aLgnum.IDPorto);
-		// 		this.onSearch();
-		// 	}.bind(this);
+			var onSuccess = function(oResultData, oResponse) {
+				oLgnum.setData(oResultData.results);
+				
+				var aDados = oResultData.results;
+				var field = {}; field = aDados[0];
+				for(var i=0; i < aDados.length; i++){
+					if(aDados[i].Padrao === true){ field = aDados[i]; break; }
+				}
+				this.setLgnum(field);
+				this._addHead();
+				// this.onSearch();
+	    		oViewModel.setProperty('/busy', false);
+			}.bind(this);
+
+			var onError = function(oError) {
+				MessageToast.show(this.getMsg("msg001"));
+	    		oViewModel.setProperty('/busy', false);
+			}.bind(this);
 			
-		// 	var onError = function(oError) {
-		// 		MessageToast.show(this.getMsg("msg001"));
-		// 	}.bind(this);
-			
-		// 	oModel.read('/PortoUsuarioSet', { success: onSuccess, error: onError } );
-		// },
+			var oModel = this.getOwnerComponent().getModel('DadosOffshore'); 
+			oModel.read('/WerksSet', { success: onSuccess, error: onError } );
+		},
 		
-		// _requestPerfil: function(Lgnum) {
-		// 	var oViewModel = this.getView().getModel('view');
-		// 	var oFilters = [];
-
-		// 	var onSuccess = function(oResultData, oResponse) {
-		// 		this.setLgnumUpd(true);
-		// 		oViewModel.setProperty('/busy', false);
-		// 	}.bind(this);
+		onLgnumPress: function(oEvent) {
+			var oLgnum = this.getOwnerComponent().getModel("lgnum");
+			if(oLgnum.getData().length > 0){
+				
+				if (this._oDialogLgnum) {
+					this._oDialogLgnum.destroy();
+					this._oDialogLgnum = undefined;
+				}
+				
+				if(!this._oDialogLgnum){
+					this._oDialogLgnum = new sap.m.SelectDialog({
+						noDataText:"-",
+						title:"{i18n>werks}",
+						class:"sapUiPopupWithPadding sapUiSizeCompact",
+						liveChange: this.handleSearchLgnum.bind(this),
+						search: this.handleSearchLgnum.bind(this),
+						confirm: this.handleCloseLgnum.bind(this),
+						cancel: this.handleCloseLgnum.bind(this),
+				        items: {
+				            path:"lgnum>/",
+				            template: new sap.m.StandardListItem({
+								id:"listLgnum",
+								title:"{lgnum>Centro}",
+								description:"{lgnum>Descricao}",
+								iconDensityAware:false,
+								iconInset:false,
+								type:"Active"
+							})
+		            	}
+					});
+				}
+				
+				this.getView().addDependent(this._oDialogLgnum);
+	
+				// toggle compact style
+				jQuery.sap.syncStyleClass("sapUiSizeCompact", this.getView(), this._oDialogLgnum);
+				this._oDialogLgnum.open();
+				
+			} else{
+				MessageToast.show(this.getMsg("msg001"));
+			}
 			
-		// 	var onError = function(oError) {
-		// 		oViewModel.setProperty('/busy', false);
-		// 		MessageToast.show(this.getMsg("msg002"));
-		// 	}.bind(this);
-			
-		// 	oFilters.push(new Filter("LGNUM", FilterOperator.EQ, Lgnum ));
-		// 	oFilters.push(new Filter("TCODE", FilterOperator.EQ, 'ZTMF03' ));
-		// 	var oModel = this.getOwnerComponent().getModel('DadosPorto'); 
-		// 	oModel.read('/PerfilUsuarioSet', { filters: oFilters, success: onSuccess, error: onError } );
-		// },
+		},
 		
-		// onLgnumPress: function(oEvent) {
-			
-		// 	if (this._oDialogLgnum) {
-		// 		this._oDialogLgnum.destroy();
-		// 		this._oDialogLgnum = undefined;
-		// 	}
-			
-		// 	if(!this._oDialogLgnum){
-		// 		this._oDialogLgnum = new sap.m.SelectDialog({
-		// 			noDataText:"-",
-		// 			title:"{i18n>lgnum}",
-		// 			class:"sapUiPopupWithPadding sapUiSizeCompact",
-		// 			liveChange: this.handleSearchLgnum.bind(this),
-		// 			search: this.handleSearchLgnum.bind(this),
-		// 			confirm: this.handleCloseLgnum.bind(this),
-		// 			cancel: this.handleCloseLgnum.bind(this),
-		// 	        items: {
-		// 	            path:"DadosPorto>/PortoSet",
-		// 	            template: new sap.m.StandardListItem({
-		// 					id:"listLgnum",
-		// 					title:"{DadosPorto>IDPorto}",
-		// 					description:"{DadosPorto>DescPorto}",
-		// 					iconDensityAware:false,
-		// 					iconInset:false,
-		// 					type:"Active"
-		// 				})
-	 //           	}
-		// 		});
-		// 	}
-			
-		// 	this.getView().addDependent(this._oDialogLgnum);
+		handleSearchLgnum: function(oEvent) {
+			var sValue = oEvent.getParameter("value");
+			var oFilter = new Filter( "Centro", FilterOperator.Contains, sValue );
+			oEvent.getSource().getBinding("items").filter([oFilter]);
+		},
 
-		// 	// toggle compact style
-		// 	jQuery.sap.syncStyleClass("sapUiSizeCompact", this.getView(), this._oDialogLgnum);
-		// 	this._oDialogLgnum.open();
-		// },
+		handleCloseLgnum: function(oEvent) {
+			var aContexts = oEvent.getParameter("selectedContexts");
+			var oViewModel = this.getView().getModel('view');
+			if (aContexts && aContexts.length) {
+				oViewModel.setProperty('/busy', true);
+				var aSelect = aContexts.map(function(oContext) { return oContext.getObject(); });
+				this.setLgnum(aSelect[0]);
+				this._addHead();
+				// this.onClear();
+				// this.onSearch();
+			}
+		},
 		
-		// handleSearchLgnum: function(oEvent) {
-		// 	var sValue = oEvent.getParameter("value");
-		// 	var oFilter = new Filter( "IDPorto", FilterOperator.Contains, sValue );
-		// 	oEvent.getSource().getBinding("items").filter([oFilter]);
-		// },
-
-		// handleCloseLgnum: function(oEvent) {
-		// 	var aContexts = oEvent.getParameter("selectedContexts");
-		// 	var oViewModel = this.getView().getModel('view');
-		// 	if (aContexts && aContexts.length) {
-		// 		oViewModel.setProperty('/busy', true);
-		// 		var aSelect = aContexts.map(function(oContext) { return oContext.getObject(); });
-		// 		this.setLgnum(aSelect[0]);
-		// 		this.aLgnum = this.getLgnum();
-		// 		var aHtml = "<strong><em>" + this.aLgnum.IDPorto + ' - ' + this.aLgnum.DescPorto + "</em></strong>";
-		// 		var oModelHtml = new JSONModel({HTMLPORTO: aHtml});
-		// 		this.getView().setModel(oModelHtml);
-		// 		this._requestPerfil(this.aLgnum.IDPorto);
-		// 		this.onClear();
-		// 		this.onSearch();
-		// 	}
-		// }
+		_addHead: function(){
+			var aHtml = "<strong><em>" + this.getLgnum().Centro + ' - ' + this.getLgnum().Descricao + "</em></strong>";
+			var oModelHtml = new JSONModel({HTMLPORTO: aHtml});
+			this.getView().setModel(oModelHtml);
+		}
 		
 	});
 

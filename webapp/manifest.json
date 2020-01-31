@@ -79,7 +79,7 @@
 					"bundleName": "com.eldorado.ewm.plCarregOffshore.i18n.i18n"
 				}
 			},
-            "DadosPorto": {
+            "DadosOffshore": {
             	"uri": "/sap/opu/odata/sap/ZGTW_PLCARREG_OFFSHORE_SRV/",
             	"type": "sap.ui.model.odata.v2.ODataModel",
             	"settings": {
