@@ -1,0 +1,9 @@
+<mvc:View
+	controllerName="com.eldorado.ewm.plCarregOffshore.controller.NotFound"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+
+	<MessagePage showNavButton="true" navButtonPress=".onNavBack"/>
+
+</mvc:View>

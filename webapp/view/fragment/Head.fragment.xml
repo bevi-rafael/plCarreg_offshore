@@ -1,0 +1,15 @@
+<core:FragmentDefinition 
+	id="Head"
+	xmlns="sap.m" 
+	xmlns:core="sap.ui.core" 
+	xmlns:l="sap.ui.layout"
+	xmlns:cms="sap.suite.ui.commons"
+	xmlns:mvc="sap.ui.core.mvc" 
+	xmlns:html="http://www.w3.org/1999/xhtml">
+
+	<Toolbar>
+		<Button id="but_lgnum" icon="sap-icon://user-settings" press="onLgnumPress"/>
+		<FormattedText htmlText="{/HTMLPORTO}"/>
+	</Toolbar>
+		
+</core:FragmentDefinition>
