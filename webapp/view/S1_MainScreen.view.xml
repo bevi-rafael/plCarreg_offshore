@@ -6,7 +6,7 @@
 	xmlns:l="sap.ui.layout"
 	class="fullHeight"
 	controllerName="com.eldorado.ewm.plCarregOffshore.controller.S1_MainScreen">
-
+  
 	<Page 
 		id="pageS1"
 		showHeader="false"
@@ -20,7 +20,7 @@
 		</subHeader>
 		
 		<content>
-			<!--<core:Fragment fragmentName="com.eldorado.ewm.plCarregOffshore.view.fragment.S1_Filter" type="XML"/>-->
+			<core:Fragment fragmentName="com.eldorado.ewm.plCarregOffshore.view.fragment.Filter" type="XML"/>
 			<core:Fragment fragmentName="com.eldorado.ewm.plCarregOffshore.view.fragment.S1_Table" type="XML"/>
 		</content>
 	

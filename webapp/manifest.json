@@ -14,12 +14,12 @@
 			"version": "1.40.12"
 		},
         "dataSources": {
-            "ZGTW_PLCARREG_OFFSHORE_SRV": {
-                "uri": "/sap/opu/odata/sap/ZGTW_PLCARREG_OFFSHORE_SRV/",
+            "ZGTWEWM009_PLCARREG_OFFSHORE": {
+                "uri": "/sap/opu/odata/sap/ZGTWEWM009_PLCARREG_OFFSHORE_SRV/",
                 "type": "OData",
                 "settings": {
                    "odataVersion": "2.0",
-                   "localUri": "localService/ZGTW_PLCARREG_OFFSHORE/metadata.xml"
+                   "localUri": "localService/ZGTWEWM009_PLCARREG_OFFSHORE/metadata.xml"
                 }
             }
         }
@@ -80,14 +80,14 @@
 				}
 			},
             "DadosOffshore": {
-            	"uri": "/sap/opu/odata/sap/ZGTW_PLCARREG_OFFSHORE_SRV/",
+            	"uri": "/sap/opu/odata/sap/ZGTWEWM009_PLCARREG_OFFSHORE_SRV/",
             	"type": "sap.ui.model.odata.v2.ODataModel",
             	"settings": {
 					"defaultOperationMode": "Server",
 					"defaultBindingMode": "OneWay",
 					"defaultCountMode": "None"
             	},
-            	"dataSource": "ZGTW_PLCARREG_OFFSHORE_SRV",
+            	"dataSource": "ZGTWEWM009_PLCARREG_OFFSHORE_SRV",
             	"preload": true
             },
             "lgnum": {

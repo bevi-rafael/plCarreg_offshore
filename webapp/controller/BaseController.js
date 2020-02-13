@@ -13,7 +13,6 @@ sap.ui.define([
 		oGenericModel: Models,
 
 		onInit: function(){
-			
 		},
 		
 		getRouter: function() {

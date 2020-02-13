@@ -1,37 +1,187 @@
 <core:FragmentDefinition 
-	id="Table"
-	xmlns="sap.m" 
-	xmlns:core="sap.ui.core" 
-	xmlns:l="sap.ui.layout"
-	xmlns:cms="sap.suite.ui.commons"
-	xmlns:mvc="sap.ui.core.mvc" 
-	xmlns:table="sap.ui.table"
-	xmlns:html="http://www.w3.org/1999/xhtml">
+xmlns="sap.m" 
+xmlns:core="sap.ui.core" 
+xmlns:l="sap.ui.layout" 
+xmlns:cms="sap.suite.ui.commons" 
+xmlns:mvc="sap.ui.core.mvc" 
+xmlns:table="sap.ui.table" 
+xmlns:html="http://www.w3.org/1999/xhtml" id="Table">
 	
-	<table:Table
-		id="idTable"
-		rows="{table>/}"
-		selectionMode="None"
-		visibleRowCount="7"
-		paste="onPaste"
-		arialabelledby="title">
-		
-		<table:columns>
-			<table:Column width="11rem">
-				<Label text="Product Name" />
-				<table:template>
-					<Text text="{table>Name}"/>
-				</table:template>
-			</table:Column>
+	 <VBox class="sapUiSizeCompact">
+	 	
+		<table:Table 
+			id="idTable" 
+			rows="{table>/}" 
+			selectionMode="MultiToggle" 
+			visibleRowCount="7" 
+			arialabelledby="{i18n>title}">
 			
-			<table:Column width="11rem">
-				<Label text="Product Id" />
-				<table:template>
-					<Input value="{table>ProductId}"/>
-				</table:template>
-			</table:Column>
-		</table:columns>
+			<table:extension>
+				<OverflowToolbar>
+					<!-- Add the Task Create button -->
+					<Button id="btTask" 
+					tooltip="{i18n>createTask}"
+					text="{i18n>createTask}"
+					icon="sap-icon://create-entry-time"
+					press="onCreateTarefa"/>
+					<ToolbarSpacer/>
+					<OverflowToolbarButton icon="sap-icon://refresh" tooltip="{i18n>btAtualizar}" press="onRefresh" />
+					<OverflowToolbarButton icon="sap-icon://action-settings" tooltip="{i18n>btPerso}" press="onPerso"/>
+					<OverflowToolbarButton icon="sap-icon://excel-attachment" tooltip="{i18n>btExport}" press="onExport"/>
+				</OverflowToolbar>
+			</table:extension>
+				
+			<table:columns>
+				<table:Column width="15rem" level="H1" scrollStep="200">
+					<!--<FormattedText htmlText="&lt;strong>{i18n>num_pln}"/>-->
+					<Label text="{i18n>num_pln}" design="Bold"/>
+					<table:template>
+						<Text text="{table>NUM_PLN}" wrapping="false"/>
+					</table:template>
+				</table:Column>
+				
+				<table:Column width="5rem" hAlign="Center">
+					<Label text="{i18n>werks}" design="Bold"/>
+					<table:template>
+						<Text text="{table>WERKS}" wrapping="false" textAlign="Center"/>
+					</table:template>
+				</table:Column>
+				
+				<table:Column width="9rem">
+					<Label text="{i18n>pedido}" design="Bold"/>
+					<!--<FormattedText htmlText="&lt;strong>{i18n>pedido}"/>-->
+					<table:template>
+						<Text text="{table>PEDIDO}" wrapping="false"/>
+					</table:template>
+				</table:Column>
+				
+				<table:Column width="10rem">
+					<Label text="{i18n>docno}" design="Bold"/>
+					<table:template>
+						<Text text="{table>DOCNO}" wrapping="false"/>
+					</table:template>
+				</table:Column>
+				
+				<table:Column width="5rem" hAlign="Center">
+					<Label text="{i18n>itemno}" design="Bold"/>
+					<table:template>
+						<Text text="{table>ITEMNO}" wrapping="false" textAlign="Center"/>
+					</table:template>
+				</table:Column>
+				
+				<table:Column width="8rem" hAlign="Center">
+					<Label text="{i18n>dt_carreg}" design="Bold"/>
+					<table:template>
+						<Text text="{table>DT_CARREG}" wrapping="false" textAlign="Center"/>
+					</table:template>
+				</table:Column>
+				
+				<table:Column width="8rem" hAlign="Center">
+					<Label text="{i18n>pl_veic}" design="Bold"/>
+					<table:template>
+						<Text text="{table>PL_VEIC}" wrapping="false" textAlign="Center"/>
+					</table:template>
+				</table:Column>
+				
+				<table:Column width="15rem">
+					<Label text="{i18n>vagao}" design="Bold"/>
+					<table:template>
+						<Input value="{table>VAGAO}" editable="false"/>
+					</table:template>
+				</table:Column>
+				
+				<table:Column width="15rem">
+					<Label text="{i18n>bl}" design="Bold"/>
+					<table:template>
+						<Input value="{table>BL}" editable="false"/>
+					</table:template>
+				</table:Column>
+				
+				<table:Column width="15rem">
+					<Label text="{i18n>waybill}" design="Bold"/>
+					<table:template>
+						<Input value="{table>WAYBILL}" editable="false"/>
+					</table:template>
+				</table:Column>
+				
+				<table:Column width="18rem">
+					<Label text="{i18n>matnr}" design="Bold"/>
+					<table:template>
+						<Input value="{table>MATNR}" editable="false"/>
+					</table:template>
+				</table:Column>
+				
+				<table:Column width="25rem">
+					<Label text="{i18n>maktx}" design="Bold"/>
+					<table:template>
+						<Input value="{table>MAKTX}" editable="false"/>
+					</table:template>
+				</table:Column>
+				
+				<table:Column width="12rem">
+					<Label text="{i18n>qty}" design="Bold"/>
+					<table:template>
+						<Input value="{table>QTY}" editable="false"/>
+					</table:template>
+				</table:Column>
+				
+				<table:Column width="4rem" hAlign="Center">
+					<Label text="{i18n>uom}" design="Bold"/>
+					<table:template>
+						<Input value="{table>UOM}" editable="false" textAlign="Center"/>
+					</table:template>
+				</table:Column>
+				
+				<table:Column width="15rem">
+					<Label text="{i18n>batchno}" design="Bold"/>
+					<table:template>
+						<Input value="{table>BATCHNO}" editable="false"/>
+					</table:template>
+				</table:Column>
+				
+				<table:Column width="12rem" hAlign="Center">
+					<Label text="{i18n>status}" design="Bold"/>
+					<table:template>
+						<FlexBox justifyContent="Center">
+							<Select selectedKey="{table>STATUS}" items="{DadosOffshore>/Status_helpSet}">
+								<!--<core:Item text="{DadosOffshore>DDTEXT}" key="{DadosOffshore>DOMVALUE_L}" enabled="false"> -->
+								<core:Item text="{DadosOffshore>DDTEXT}" key="{DadosOffshore>DOMVALUE_L}" enabled="false"/>
+							</Select>
+						</FlexBox>
+					</table:template>
+				</table:Column>
+			
+				<table:Column width="10rem">
+					<Label text="{i18n>stprt}" design="Bold"/>
+					<table:template>
+						<Input value="{table>STPRT}" editable="false"/>
+					</table:template>
+				</table:Column>
+				
+				<table:Column width="20rem">
+					<Label text="{i18n>stprt_name}" design="Bold"/>
+					<table:template>
+						<Input value="{table>STPRT_NAME}" editable="false"/>
+					</table:template>
+				</table:Column>
+				
+				<table:Column width="10rem">
+					<Label text="{i18n>mcarr}" design="Bold"/>
+					<table:template>
+						<Input value="{table>MCARR}" editable="false"/>
+					</table:template>
+				</table:Column>
+				
+				<table:Column width="20rem">
+					<Label text="{i18n>mcarr_name}" design="Bold"/>
+					<table:template>
+						<Input value="{table>MCARR_NAME}" editable="false"/>
+					</table:template>
+				</table:Column>
+			</table:columns>
+			
+		</table:Table>
 		
-	</table:Table>
-
+	</VBox>
+	
 </core:FragmentDefinition>

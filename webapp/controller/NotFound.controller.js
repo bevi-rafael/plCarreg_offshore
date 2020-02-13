@@ -15,10 +15,8 @@ sap.ui.define([
 				delete this._oData.fromTarget;
 				return;
 			}
-
 			// call the parent's onNavBack
 			BaseController.prototype.onNavBack.apply(this, arguments);
-			
 		},
 
 		_targetDisplay : function (oEvent) {

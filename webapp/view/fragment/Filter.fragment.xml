@@ -1,0 +1,111 @@
+<core:FragmentDefinition 
+	id="Filter"
+	xmlns="sap.m" 
+	xmlns:core="sap.ui.core" 
+	xmlns:l="sap.ui.layout"
+	xmlns:cms="sap.suite.ui.commons"
+	xmlns:mvc="sap.ui.core.mvc" 
+	xmlns:fb="sap.ui.comp.filterbar"
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	controllerName="com.eldorado.ewm.plCarregOffshore.controller.S1_MainScreen">
+	
+	<VBox>
+		<fb:FilterBar 
+			id="idFilterBar" 
+			search="onSearch" 
+			clear="onClear"
+			showClearButton="true"
+			showClearOnFB="true"
+			showRestoreButton="true">
+			<fb:filterItems>
+				<fb:FilterItem name="NUM_PLN" label="{i18n>num_pln}">
+					<fb:control>
+						<Input id="filterNum_pln" 
+							width="100%" 
+							maxLength="10" 
+							type="Text" 
+							showValueHelp="true" 
+							valueHelpOnly="false"
+							valueHelpRequest="handleValueHelpNum_pln">
+						</Input>
+					</fb:control>				
+				</fb:FilterItem>
+			
+				<fb:FilterItem name="DOCNO" label="{i18n>docno}">
+					<fb:control>
+						<Input id="filterDocno" 
+							width="100%" 
+							maxLength="35" 
+							type="Text" 
+							showValueHelp="true" 
+							valueHelpOnly="false" 
+							valueHelpRequest="handleValueHelpDocno">
+						</Input>	
+					</fb:control>				
+				</fb:FilterItem>
+				
+				<fb:FilterItem name="PL_VEIC" label="{i18n>pl_veic}">
+					<fb:control>
+						<Input id="filterPl_veic" 
+							width="100%" 
+							maxLength="20" 
+							type="Text" 
+							showValueHelp="false" 
+							valueHelpOnly="false">
+						</Input>	
+					</fb:control>				
+				</fb:FilterItem>
+				
+				<fb:FilterItem name="VAGAO" label="{i18n>vagao}">
+					<fb:control>
+						<Input id="filterVagao" 
+							width="100%" 
+							maxLength="20" 
+							type="Text" 
+							showValueHelp="false" 
+							valueHelpOnly="false">
+						</Input>	
+					</fb:control>				
+				</fb:FilterItem>
+				
+				<fb:FilterItem name="BL" label="{i18n>bl}">
+					<fb:control>
+						<Input id="filterBl" 
+							width="100%" 
+							maxLength="20" 
+							type="Text" 
+							showValueHelp="true" 
+							valueHelpOnly="false" 
+							valueHelpRequest="handleValueHelpBl">
+						</Input>
+					</fb:control>				
+				</fb:FilterItem>
+				
+				<fb:FilterItem name="MATNR" label="{i18n>matnr}">
+					<fb:control>
+						<Input id="filterMatnr" 
+							width="100%" 
+							maxLength="18" 
+							type="Text" 
+							showValueHelp="true" 
+							valueHelpOnly="false" 
+							valueHelpRequest="handleValueHelpMatnr">
+						</Input>
+					</fb:control>				
+				</fb:FilterItem>
+				
+				<fb:FilterItem id="filterDt_Carreg" name="DT_CARREG" label='{i18n>Dtcarre}'>
+					<fb:control>
+						<!--<DatePicker id="filterDtCarre" displayFormat="yyyy/MM/dd" valueFormat="yyyy/MM/dd"/>-->
+						<DateRangeSelection 
+						id="filterDtCarre" 
+						width="10%"
+						displayFormat="yyyy/MM/dd" 
+						editable="true" delimiter="-"/>
+					</fb:control>
+				</fb:FilterItem>
+				
+			</fb:filterItems>
+	    </fb:FilterBar>	
+	</VBox>
+</core:FragmentDefinition>
